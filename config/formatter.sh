@@ -13,4 +13,5 @@ if [ ! -f "$jar_file" ]; then
 fi
 
 # execute formatter
+echo $@
 $java_cmd -jar "$jar_file" $@

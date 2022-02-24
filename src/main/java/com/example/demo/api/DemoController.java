@@ -9,6 +9,6 @@ public class DemoController {
 	@GetMapping("/update/status")
 		      public void updateStatus() {
 
-	}
+      	}
 
 }

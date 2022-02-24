@@ -1,8 +1,8 @@
 #!/bin/sh -e
-format_cmd="$(dirname $(realpath "$0"))/config/formatter.sh"
-echo "$format_cmd" 
+format_cmd=$(git rev-parse --show-toplevel)"/config/formatter.sh"
+echo $format_cmd 
 # skip if NO_VERIFY env var set
-if [ "$NO_VERIFY" ]; then
+if [ $NO_VERIFY ]; then
     echo 'google-java-format skipped' 1>&2
     exit 0
 fi

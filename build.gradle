@@ -28,11 +28,12 @@ dependencies {
 //	useJUnitPlatform()
 // }
 
-
-tasks.register('installGitHooks', Copy) {
-	from(file('config/hooks/pre-commit-stub')) {
-		rename 'pre-commit-stub', 'pre-commit'
-	}
-	into file('.git/hooks')
+task installLocalGitHook(type: Copy) {
+	println 'Installing Local Git Hook'
+	from new File(rootProject.rootDir, 'config/hooks/pre-commit')
+	into { new File(rootProject.rootDir, '.git/hooks')}
 	fileMode 0777
+	println 'Local Git Hook Installed'
 }
+
+build.dependsOn installLocalGitHook

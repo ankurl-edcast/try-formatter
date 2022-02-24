@@ -1,6 +1,6 @@
 #!/bin/sh -e
-format_cmd="$(dirname $(realpath "$0"))/config/download-google-formatter.sh"
-
+format_cmd="$(dirname $(realpath "$0"))/config/formatter.sh"
+echo "$format_cmd" 
 # skip if NO_VERIFY env var set
 if [ "$NO_VERIFY" ]; then
     echo 'google-java-format skipped' 1>&2

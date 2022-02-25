@@ -7,7 +7,22 @@ if [ $NO_VERIFY ]; then
     exit 0
 fi
 
+jar_version=1.6
+jar_dir="$HOME/.local/share/java"
+jar_file="$jar_dir/google-java-format-$jar_version-all-deps.jar"
+java_cmd="java"
+
+echo $jar_file
+# download jar file if missing
+if [ ! -f "$jar_file" ]; then
+    mkdir -p "$jar_dir"
+    # wget -O "$jar_file" https://github.com/google/google-java-format/releases/download/google-java-format-$jar_version/google-java-format-$jar_version-all-deps.jar
+    curl -L https://github.com/google/google-java-format/releases/download/google-java-format-$jar_version/google-java-format-$jar_version-all-deps.jar -o "$jar_file"
+fi
+
+# execute formatter
+
 # list all added/copied/modified/renamed java files
 git diff -z --staged --name-only --diff-filter=ACMR | grep -z '.java$' |
     # run google-java-format on each file and re-stage any new changes
-    xargs -0 -I % echo "$format_cmd -i '%'; git add -f '%'" | sh
+    $java_cmd -jar $jar_file %; git add -f % | sh
